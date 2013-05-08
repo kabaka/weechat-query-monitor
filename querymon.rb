@@ -36,7 +36,6 @@ end
 def print_hook data, buffer, date, tags,
   displayed, highlight, prefix, message
   
-
   unless Weechat.buffer_get_string(buffer, 'plugin') == 'irc'
     return Weechat::WEECHAT_RC_OK
   end
@@ -46,8 +45,6 @@ def print_hook data, buffer, date, tags,
   if name.start_with? 'server.' or name.include? '#'
     return Weechat::WEECHAT_RC_OK
   end
-
-  Weechat.print '', name
 
   Weechat.print @buffer,
     "#{prefix}\t#{message}"
