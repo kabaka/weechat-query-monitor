@@ -19,13 +19,14 @@
 # SOFTWARE.
 
 def weechat_init
-  Weechat.register 'querymon', 'Kabaka', '0.2', 'MIT',
-    'Query Monitor', '', ''
+  Weechat.register 'querymon', 'Kabaka',
+    '0.2', 'MIT', 'Query Monitor', '', ''
 
   Weechat.hook_print '', '', '', 0,
     'print_hook', ''
 
-  @buffer = Weechat.buffer_new 'QueryMon', '', '', '', ''
+  @buffer = Weechat.buffer_new 'QueryMon',
+    '', '', '', ''
 
   Weechat.buffer_set @buffer,
     'title', 'Query Monitor'
@@ -40,9 +41,9 @@ def print_hook data, buffer, date, tags,
     return Weechat::WEECHAT_RC_OK
   end
 
-  name = Weechat.buffer_get_string(buffer, 'name')
+  network, name = Weechat.buffer_get_string(buffer, 'name').split '.'
 
-  if name.start_with? 'server.' or name.include? '#'
+  if network == 'server' or Weechat.info_get('irc_is_channel', "#{network},#{name}") == 1
     return Weechat::WEECHAT_RC_OK
   end
 
