@@ -43,7 +43,7 @@ def print_hook data, buffer, date, tags,
 
   network, name = Weechat.buffer_get_string(buffer, 'name').split '.'
 
-  if network == 'server' or Weechat.info_get('irc_is_channel', "#{network},#{name}") == 1
+  if network == 'server' or Weechat.info_get('irc_is_channel', "#{network},#{name}") == '1'
     return Weechat::WEECHAT_RC_OK
   end
 
